@@ -1,4 +1,21 @@
 class DirectorsController < ApplicationController
+  def update
+    #Get the ID out of params
+    d_id=params.fetch("the_id")
+    #Look up the existing record
+    matching_director_record= Director.where({:id =>d_id})
+    the_director=matching_director_record.at(0)
+    #Overwrite each column with values from user inputs
+    the_director.name =params.fetch("the_name")
+    the_director.dob =params.fetch("the_dob")
+    the_director.bio =params.fetch("the_bio")
+    the_director.image =params.fetch("the_image")
+    #Save
+    the_director.save
+    #redirect to director details page
+    redirect_to("/directors/#{the_director.id}")
+  end
+
   def create
     #Retrieve the user's inputs from params
     #Create a record in the director table
@@ -12,6 +29,17 @@ class DirectorsController < ApplicationController
     d.image = params.fetch("the_image")
 
     d.save
+    redirect_to("/directors")
+  end
+
+  def destroy
+    the_id = params.fetch("an_id")
+
+    matching_records = Director.where({ :id => the_id })
+    the_director = matching_records.at(0)
+
+    the_director.destroy
+
     redirect_to("/directors")
   end
 
