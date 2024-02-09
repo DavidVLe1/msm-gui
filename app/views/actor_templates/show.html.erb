@@ -6,6 +6,11 @@
   Go back
 </a>
 
+<div>
+  <a href="/delete_actor/<%= @the_actor.id %>">
+    Delete actor
+  </a>
+</div>
 <hr>
 
 <dl>
@@ -100,9 +105,9 @@
 
       <td>
         <% d_id = the_movie.director_id %>
-        
+
         <% matching_directors = Director.where({ :id => d_id }) %>
-        
+
         <% the_director = matching_directors.at(0) %>
 
         <%= the_director.name %>
