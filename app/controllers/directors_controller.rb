@@ -1,4 +1,20 @@
 class DirectorsController < ApplicationController
+  def create
+    #Retrieve the user's inputs from params
+    #Create a record in the director table
+    #Populate each column with the user input
+    #Save
+    #
+    d = Director.new
+    d.name = params.fetch("the_name")
+    d.dob = params.fetch("the_dob")
+    d.bio = params.fetch("the_bio")
+    d.image = params.fetch("the_image")
+
+    d.save
+    redirect_to("/directors")
+  end
+
   def index
     matching_directors = Director.all
     @list_of_directors = matching_directors.order({ :created_at => :desc })
@@ -31,7 +47,7 @@ class DirectorsController < ApplicationController
       all.
       where.not({ :dob => nil }).
       order({ :dob => :asc })
-      
+
     @eldest = directors_by_dob_asc.at(0)
 
     render({ :template => "director_templates/eldest" })

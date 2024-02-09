@@ -18,7 +18,7 @@ class ActorsController < ApplicationController
 
   def create
     #Retrieve the user's inputs from params
-    #Create a record in the movie table
+    #Create a record in the actors table
     #Populate each column with the user input
     #Save
     #
